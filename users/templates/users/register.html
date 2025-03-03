@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Babyland Joy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: url('https://source.unsplash.com/1600x900/?baby,soft') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            padding-top: 80px; /* Space for fixed navbar */
+        }
+
+        /* Fixed Header */
+        header {
+            width: 100%;
+            background: #ff6600;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .cart-icon {
+            font-size: 20px;
+            position: relative;
+        }
+        .cart-icon span {
+            background: red;
+            color: white;
+            border-radius: 50%;
+            font-size: 14px;
+            padding: 2px 7px;
+            position: absolute;
+            top: -5px;
+            right: -10px;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            padding: 10px 15px;
+            transition: 0.3s ease-in-out;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Register Form */
+        .register {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            margin-top: 30px;
+        }
+        .register h1 {
+            font-size: 26px;
+            color: #ff6600;
+            margin-bottom: 15px;
+        }
+        .register form {
+            display: flex;
+            flex-direction: column;
+        }
+        .register form p {
+            margin-bottom: 10px;
+            text-align: left;
+            font-weight: bold;
+            color: #444;
+        }
+        .register input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .register-btn {
+            background: #ff6600;
+            color: white;
+            font-size: 18px;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+        .register-btn:hover {
+            background: #cc5500;
+            transform: scale(1.05);
+        }
+
+        /* Messages */
+        .messages {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+        .messages li {
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .messages .success { background: #4CAF50; color: white; }
+        .messages .error { background: #D32F2F; color: white; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .register {
+                width: 90%;
+            }
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🛒 Babyland Joy</div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/users/login/">Login</a>
+        </nav>
+        <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span>{{ cart.cart_items.count }}</span>
+        </div>
+    </header>
+
+    <section class="register">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <h1>Register</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="register-btn">Register</button>
+        </form>
+    </section>
+
+</body>
+</html>
