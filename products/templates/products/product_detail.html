@@ -1,159 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'products/base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ product.name }} - Babyland Joy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-        }
-
-        /* Navbar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #ffcc00;
-            padding: 15px 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar .logo {
-            font-size: 22px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .navbar .nav-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .navbar .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 600;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 18px;
-            transition: 0.3s ease-in-out;
-        }
-
-        .navbar .nav-links a:hover {
-            background: rgba(255, 102, 0, 0.8);
-            color: white;
-            transform: scale(1.1);
-        }
-
-        /* Product Details */
-        .product-details {
-            max-width: 900px;
-            margin: 50px auto;
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-details img {
-            width: 400px;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .product-info {
-            max-width: 450px;
-        }
-
-        .product-info h1 {
-            font-size: 28px;
-            color: #ff6600;
-        }
-
-        .product-info p {
-            font-size: 18px;
-            margin: 10px 0;
-        }
-
-        .product-info .price {
-            font-size: 22px;
-            font-weight: bold;
-            color: #ff6600;
-        }
-
-        .product-info a {
-            display: inline-block;
-            text-decoration: none;
-            background: #ff6600;
-            color: white;
-            padding: 12px 20px;
-            font-size: 18px;
-            border-radius: 5px;
-            margin-top: 15px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .product-info a:hover {
-            background: rgba(255, 102, 0, 0.8);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #333;
-            color: white;
-            margin-top: 30px;
-            font-size: 14px;
-        }
-    </style>
-</head>
-
-<body>
-
-    <nav class="navbar">
-        <div class="logo">👶 Babyland Joy</div>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/cart/">Cart</a>
-            <a href="/orders/">Orders</a>
-            <a href="/users/login/">Login</a>
-        </div>
-    </nav>
-
-    <!-- Product Details -->
-    <div class="product-details">
-        <img src="{{ product.image.url }}" alt="{{ product.name }}">
-        <div class="product-info">
-            <h1>{{ product.name }}</h1>
-            <p>{{ product.description }}</p>
-            <p class="price">Rs. {{ product.price }}</p>
-            <a href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
-        </div>
+{% block title %}{{ product.name }} - Babyland Joy{% endblock %}
+{% block css %}
+<!-- Add specific CSS for the register page -->
+<link rel="stylesheet" href="{% static 'css/product_details.css' %}">
+{% endblock %}
+{% block content %}
+<!-- Product Details -->
+<div class="product-details">
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+    <div class="product-info">
+        <h1>{{ product.name }}</h1>
+        <p><strong>Model No:</strong> {{ product.model_no }}</p>
+        <p><strong>Size:</strong> {{ product.size }}</p>
+        <p class="product-description">{{ product.description }}</p>
+        <a href="{% url 'book_now' product.id %}" class="add-to-cart-btn">Book Now</a>
     </div>
+</div>
 
-    <footer>
-        <p>© 2025 Babyland Joy. All rights reserved.</p>
-    </footer>
 
-</body>
-
-</html>
+<script>
+    // Toggle Hamburger Menu
+    function toggleMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('active');
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,882 @@
+ /* Hero Section */
+ .hero-slider {
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
+   position: relative;
+ }
+
+ /* Swiper Container */
+ .swiper {
+   width: 100%;
+   height: 100%;
+   border-radius: 25px;
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+ }
+
+ /* Swiper Slide */
+ .swiper-slide {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: relative;
+ }
+
+ .swiper-slide img {
+   width: 100%;
+   height: auto;
+   /* Changed from 100vh to auto to maintain aspect ratio */
+   object-fit: cover;
+   border-radius: 25px;
+   max-height: 100vh;
+   /* Ensure the image doesn't exceed the height */
+ }
+
+ /* Gradient Overlay (Blue-Yellow Animation) */
+ /* .gradient-overlay {
+   position: absolute;
+   inset: 0;
+   background: linear-gradient(to right, rgba(5, 91, 168, 0.6) 15%, rgba(255, 248, 204, 0.8) 85%);
+   z-index: 1;
+   opacity: 0.8;
+   animation: gradientShift 8s ease infinite alternate;
+ } */
+
+ /* Gradient Animation */
+ /* @keyframes gradientShift {
+   0% {
+     background: linear-gradient(to right, rgba(5, 91, 168, 0.6) 15%, rgba(255, 248, 204, 0.8) 85%);
+   }
+
+   100% {
+     background: linear-gradient(to right, rgba(5, 91, 168, 0.4) 25%, rgba(255, 248, 204, 0.9) 75%);
+   }
+ } */
+
+ /* Swiper Caption (Text Styling) */
+ .swiper-caption {
+   position: absolute;
+   left: 10%;
+   top: 50%;
+   transform: translateY(-50%);
+   z-index: 2;
+   color: white;
+ }
+
+ /* Caption Title (Animated Gradient Text) */
+ .caption-title {
+   font-size: 4rem;
+   font-weight: 800;
+   opacity: 0;
+   /* Hidden initially */
+   background: linear-gradient(90deg, #e9e9ea, #b4e9f6);
+   background-clip: text;
+   -webkit-background-clip: text;
+   color: transparent;
+   /* animation: gradientText 6s ease infinite alternate; */
+ }
+
+ /* Text Gradient Animation */
+ /* @keyframes gradientText {
+   0% {
+     background-position: 0%;
+   }
+
+   100% {
+     background-position: 100%;
+   }
+ } */
+
+ /* Caption Subtitle (Slide & Fade Animation) */
+ .caption-subtitle {
+   font-size: 1.8rem;
+   opacity: 0;
+   /* Hidden initially */
+   color: #fff8cc;
+   text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+ }
+
+ /* Swiper Pagination */
+ .swiper-pagination-bullet {
+   background-color: #6d76dc;
+   width: 16px;
+   height: 16px;
+   margin: 0 8px;
+   transition: background-color 0.4s, transform 0.4s;
+ }
+
+ .swiper-pagination-bullet-active {
+   background-color: #00aaff;
+   transform: scale(1.3);
+ }
+
+ /* Swiper Navigation */
+ .swiper-button-next,
+ .swiper-button-prev {
+   color: white;
+   background: rgba(0, 0, 0, 0.6);
+   width: 45px;
+   height: 90px;
+   border-radius: 12px;
+   transition: all 0.4s ease;
+ }
+
+ .swiper-button-next:hover,
+ .swiper-button-prev:hover {
+   background-color: rgba(0, 0, 0, 0.9);
+   transform: scale(1.2);
+ }
+
+ /* Responsive Design */
+ @media (max-width: 1024px) {
+   .caption-title {
+     font-size: 3rem;
+   }
+
+   .caption-subtitle {
+     font-size: 1.5rem;
+   }
+ }
+
+ @media (max-width: 768px) {
+   .caption-title {
+     font-size: 2.5rem;
+   }
+
+   .caption-subtitle {
+     font-size: 1.2rem;
+   }
+
+   .swiper-button-next,
+   .swiper-button-prev {
+     width: 35px;
+     height: 80px;
+     border-radius: 6pz;
+   }
+ }
+
+ @media (max-width: 480px) {
+   .caption-title {
+     font-size: 2rem;
+   }
+
+   .caption-subtitle {
+     font-size: 1rem;
+   }
+
+   .swiper-button-next,
+   .swiper-button-prev {
+     width: 40px;
+     height: 40px;
+   }
+ }
+
+
+ /* Floating WhatsApp button styles on the left side */
+ .whatsapp-button {
+   position: fixed;
+   bottom: 20px;
+   left: 20px;
+   background-color: #25d366;
+   color: white;
+   border-radius: 50%;
+   width: 50px;
+   height: 50px;
+   font-size: 30px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   display: none;
+   /* Initially hidden */
+   opacity: 0;
+   transition: opacity 0.3s ease-in-out;
+   z-index: 1000;
+   text-decoration: none;
+   /* Flexbox centering */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+
+ /* WhatsApp button hover effect */
+ .whatsapp-button:hover {
+   background-color: #128c7e;
+   /* Darker green on hover */
+   animation: none;
+   /* Disable animation on hover */
+ }
+
+ /* Tooltip text */
+ .tooltip-text {
+   visibility: hidden;
+   background-color: #25d366;
+   /* Same green as the button */
+   color: white;
+   text-align: center;
+   border-radius: 5px;
+   padding: 10px;
+   position: absolute;
+   left: 100%;
+   top: 50%;
+   transform: translateY(-50%);
+   opacity: 0;
+   transition: opacity 0.3s;
+   font-size: 14px;
+   white-space: nowrap;
+   /* Prevent the tooltip from breaking */
+   margin-left: 10px;
+   /* Space between the icon and the tooltip */
+ }
+
+ /* Show the tooltip when the user hovers over the button */
+ .whatsapp-button:hover .tooltip-text {
+   visibility: visible;
+   opacity: 1;
+ }
+
+ /* Animation for sliding in from the left */
+ @keyframes slideIn {
+   0% {
+     left: -80px;
+     /* Start off-screen */
+     opacity: 0;
+   }
+
+   100% {
+     left: 20px;
+     /* Final position */
+     opacity: 1;
+   }
+ }
+
+ /* Animation for sliding out when hiding */
+ @keyframes slideOut {
+   0% {
+     left: 20px;
+     opacity: 1;
+   }
+
+   100% {
+     left: -80px;
+     /* Slide off-screen */
+     opacity: 0;
+   }
+ }
+
+ .hero-slider .swiper-slide {
+   position: relative;
+ }
+
+ /* Pop-In Animation */
+ @keyframes fadeInUp {
+   0% {
+     transform: translate(-50%, 50%) scale(0);
+     opacity: 0;
+   }
+
+   60% {
+     transform: translate(-50%, 30%) scale(1.05);
+     opacity: 0.8;
+   }
+
+   100% {
+     transform: translate(-50%, -50%) scale(1);
+     opacity: 1;
+   }
+ }
+
+ .swiper-caption {
+   position: absolute;
+   top: 50%;
+   left: 30%;
+   transform: translate(-50%, -50%);
+   text-align: center;
+   color: #db1515;
+   font-family: 'Arial', sans-serif;
+   z-index: 1000;
+   opacity: 1;
+ }
+
+ /* The class to trigger animation */
+ .swiper-caption.animate {
+   animation: fadeInUp 2s ease-out forwards;
+ }
+
+ .swiper-caption h1 {
+   font-size: 3rem;
+   font-weight: bold;
+   animation: fadeInUp 1.5s ease-out forwards;
+ }
+
+ .swiper-caption p {
+   font-size: 1.5rem;
+   animation: fadeInUp 2s ease-out forwards;
+   animation-delay: 0.5s;
+ }
+
+ /* Mobile & Tablet Screens */
+ @media (max-width: 768px) {
+   .swiper-caption h1 {
+     font-size: 2rem;
+     animation: fadeInUp 1.5s ease-out forwards;
+   }
+
+   .swiper-caption p {
+     font-size: 1.2rem;
+     animation: fadeInUp 2s ease-out forwards;
+     animation-delay: 0.5s;
+   }
+
+   .swiper-caption {
+     top: 65%;
+     animation: fadeInUp 2s ease-out forwards;
+   }
+ }
+
+ /* Smaller mobile screens */
+ @media (max-width: 480px) {
+   .swiper-caption h1 {
+     font-size: 1.5rem;
+     animation: fadeInUp 1.5s ease-out forwards;
+   }
+
+   .swiper-caption p {
+     font-size: 1rem;
+     animation: fadeInUp 2s ease-out forwards;
+     animation-delay: 0.5s;
+   }
+
+   .swiper-caption {
+     top: 70%;
+     animation: fadeInUp 2s ease-out forwards;
+   }
+ }
+
+
+ /* Products Section */
+ /* Products Section */
+ /* Products Section */
+ .products-container {
+   padding: 50px 20px;
+   text-align: center;
+ }
+
+ .products-container h1 {
+   font-size: 32px;
+   color: #0066cc;
+   margin-bottom: 20px;
+   transform: scale(1.3);
+ }
+
+ .products-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+   gap: 25px;
+   max-width: 1200px;
+   margin: auto;
+ }
+
+ .product-card {
+   background: white;
+   border-radius: 15px;
+   overflow: hidden;
+   padding: 20px;
+   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+   transition: transform 0.3s ease, box-shadow 0.3s ease;
+   position: relative;
+   z-index: 0;
+   max-width: 280px;
+   margin: auto;
+ }
+
+ .product-card::before {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: rgba(0, 0, 0, 0.1);
+   border-radius: 15px;
+   z-index: -1;
+   transition: background 0.3s ease;
+ }
+
+ .product-card img {
+   width: 100%;
+   height: 200px;
+   object-fit: cover;
+   border-radius: 10px;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+   /* Adding shadow for the image */
+   border: 4px solid #f0f0f0;
+   /* Soft border around the image */
+   transition: box-shadow 0.3s ease;
+ }
+
+ /* Remove zoom effect from image hover */
+ .product-card img:hover {
+   transform: none;
+   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+   /* Highlight shadow on hover */
+ }
+
+ .product-card h2 {
+   font-size: 20px;
+   margin: 15px 0 10px;
+   font-weight: 600;
+   color: #333;
+   transition: color 0.3s ease;
+ }
+
+ .product-card p {
+   font-size: 18px;
+   font-weight: bold;
+   color: #0066cc;
+   margin-bottom: 10px;
+ }
+
+ .product-card a {
+   display: block;
+   text-decoration: none;
+   color: white;
+   background: #0066cc;
+   padding: 12px 20px;
+   margin-top: 10px;
+   border-radius: 5px;
+   font-weight: bold;
+   transition: 0.3s;
+   text-align: center;
+ }
+
+ .product-card a:hover {
+   background: rgba(0, 102, 204, 0.8);
+   transform: scale(1.05);
+ }
+
+ /* Hover effect for white border line and subtle background */
+ .product-card:hover {
+   box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+   /* Larger shadow */
+   transform: translateY(-5px);
+   /* Slight lift effect */
+ }
+
+ .product-card:hover::before {
+   background: rgba(0, 0, 0, 0.05);
+   /* Slight background dimming */
+ }
+
+ /* Add a slight spacing between the cards */
+ .products-grid .product-card {
+   margin-bottom: 30px;
+   /* Adds space between cards */
+ }
+
+ .container {
+   width: 100%;
+   max-width: 100%;
+   margin: 0 auto;
+   padding: 0;
+ }
+
+ .section-box {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   width: 90%;
+   max-width: 1200px;
+   min-height: 500px;
+   margin: 100px auto;
+   background: linear-gradient(135deg, #055BAB, #f1ff56);
+   border-radius: 12px;
+   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+   padding: 20px;
+   /* Reduced padding */
+   color: #fff;
+   text-align: center;
+   overflow: hidden;
+   position: relative;
+   animation: fadeIn 1s ease-out;
+   visibility: visible;
+ }
+
+ @keyframes fadeIn {
+   from {
+     opacity: 0;
+   }
+
+   to {
+     opacity: 1;
+   }
+ }
+
+ .content-container {
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+   /* Adjusted for more compact space */
+   width: 100%;
+   gap: 20px;
+   /* Adjusted gap for better alignment */
+   animation: slideIn 1s ease-out;
+ }
+
+ @keyframes slideIn {
+   from {
+     transform: translateX(-100%);
+   }
+
+   to {
+     transform: translateX(0);
+   }
+ }
+
+ .text-content {
+   flex: 1;
+   text-align: left;
+   color: #fff;
+   animation: textPopUp 1s ease-out;
+   margin-bottom: 20px;
+   line-height: 2.5;
+   /* Adjusted bottom margin */
+ }
+
+ .text-content h1 {
+   color: wheat;
+   margin-left: 100px;
+   /* Removed extra left margin */
+   margin-bottom: 15px;
+ }
+
+
+
+ @keyframes textPopUp {
+   from {
+     opacity: 0;
+     transform: translateY(20px);
+   }
+
+   to {
+     opacity: 1;
+     transform: translateY(0);
+   }
+ }
+
+ .text-content h1,
+ .text-content h2 {
+   text-transform: uppercase;
+   margin-bottom: 15px;
+   /* Adjusted margin */
+   font-size: 2.5rem;
+ }
+
+ .text-content p {
+   font-size: 18px;
+   margin-bottom: 15px;
+   line-height: 1.4;
+   /* Reduced line height */
+   font-weight: 400;
+ }
+
+ .extra-content {
+   display: none;
+   overflow: hidden;
+   opacity: 0;
+   max-height: 0;
+   transition: max-height 0.4s ease, opacity 0.4s ease;
+ }
+
+ .extra-content.show {
+   display: block;
+   max-height: 500px;
+   opacity: 1;
+ }
+
+ .read-more {
+   display: inline-block;
+   padding: 12px 25px;
+   font-size: 18px;
+   font-weight: 600;
+   color: #fff;
+   background-color: #ffcc00;
+   border-radius: 8px;
+   transition: all 0.3s ease;
+   cursor: pointer;
+   text-align: center;
+   margin-top: 15px;
+   border: none;
+ }
+
+ .read-more:hover {
+   background-color: #ff9900;
+   transform: scale(1.05);
+ }
+
+ .image-content {
+   flex: 0 0 35%;
+   text-align: center;
+   animation: imagePopUp 1s ease-out;
+ }
+
+ @keyframes imagePopUp {
+   from {
+     opacity: 0;
+     transform: translateY(20px);
+   }
+
+   to {
+     opacity: 1;
+     transform: translateY(0);
+   }
+ }
+
+ .image-content img {
+   width: 100%;
+   height: 300px;
+   object-fit: cover;
+   border-radius: 8px;
+   transition: transform 0.3s ease;
+ }
+
+ .image-content img:hover {
+   transform: scale(1.05);
+ }
+
+ @media (max-width: 992px) {
+   .content-container {
+     flex-direction: column;
+     text-align: center;
+   }
+
+   .image-content {
+     flex: 0 0 100%;
+   }
+
+   .image-content img {
+     height: 250px;
+   }
+
+   .text-content {
+     text-align: center;
+   }
+
+   .text-content h1,
+   .text-content h2 {
+     font-size: 2rem;
+   }
+
+   .text-content p {
+     font-size: 16px;
+   }
+ }
+
+
+
+ .paginator {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-top: 30px;
+   gap: 12px;
+   font-family: 'Poppins', sans-serif;
+   flex-wrap: wrap;
+ }
+
+ .page-link,
+ .page-number {
+   text-decoration: none;
+   padding: 10px 18px;
+   font-size: 16px;
+   font-weight: 600;
+   color: white;
+   background: linear-gradient(45deg, #007bff, #00d4ff);
+   border-radius: 8px;
+   transition: all 0.3s ease-in-out;
+   box-shadow: 0 3px 10px rgba(0, 123, 255, 0.3);
+   cursor: pointer;
+ }
+
+ .page-link:hover,
+ .page-number:hover {
+   background: linear-gradient(45deg, #0056b3, #0099cc);
+   transform: translateY(-3px);
+   box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
+ }
+
+ .page-number {
+   display: inline-block;
+   margin: 0 5px;
+   padding: 10px 15px;
+ }
+
+ .page-number.active {
+   background: linear-gradient(45deg, #ff7eb3, #ff758c);
+   color: #fff;
+   font-weight: bold;
+   box-shadow: 0 5px 15px rgba(255, 118, 150, 0.5);
+ }
+
+ /* Animation on hover */
+
+
+ @keyframes bounce {
+
+   0%,
+   100% {
+     transform: translateY(0);
+   }
+
+   50% {
+     transform: translateY(-10px);
+   }
+ }
+
+ .page-link:hover,
+ .page-number:hover {
+   animation: bounce 0.4s ease-in-out;
+ }
+
+ /* Responsive Design */
+ @media (max-width: 768px) {
+   .paginator {
+     flex-direction: column;
+     gap: 8px;
+   }
+
+   .page-link,
+   .page-number {
+     padding: 8px 14px;
+     font-size: 14px;
+   }
+ }
+
+ /*prouduct iamge bounce in */
+
+
+ @keyframes bounceIn {
+   0% {
+     opacity: 0;
+     transform: translateY(50px) scale(0.85);
+   }
+
+   60% {
+     opacity: 1;
+     transform: translateY(-15px) scale(1.05);
+   }
+
+   100% {
+     opacity: 1;
+     transform: translateY(0) scale(1);
+   }
+ }
+
+ .product-card {
+   opacity: 0;
+   /* Initially hidden */
+   transform: translateY(50px) scale(0.85);
+   /* Start from below with smaller scale */
+   transition: opacity 0.3s ease, transform 0.3s ease;
+   /* Smooth transition when the animation starts */
+ }
+
+ .product-card.visible {
+   opacity: 1;
+   animation: bounceIn 1.5s ease-in-out forwards;
+   /* Animation when it becomes visible */
+ }
+
+ /* Styling for the Our Team section */
+.our-team {
+  background-color: #f8f8f8; /* Adjust this as needed */
+  padding: 60px 20px;
+}
+
+.our-team h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+
+/* Styling for each team member card */
+.team-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  text-align: center;
+  padding: 20px;
+  max-width: 250px;
+}
+
+/* Hover effect */
+.team-card:hover {
+  transform: translateY(-10px); /* Lifts the card on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.team-image-container {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.team-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease-in-out;
+}
+
+/* Image zoom on hover */
+.team-image-container:hover img {
+  transform: scale(1.1); /* Zoom effect on hover */
+}
+
+.team-info h3 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.team-info p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Animation for the team cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.team-card {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Hover Effects for Team Cards */
+.team-card:hover .team-info {
+  color: #f79c42; /* Change color when hovered */
+}
+

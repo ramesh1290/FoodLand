@@ -1,0 +1,1073 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Now - {{ product.name }}</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* ==============================
+       FONT & GLOBAL RESET
+    ============================== */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html,
+        body {
+            background: linear-gradient(135deg, #131217, #35d7dd);
+            /* Fixed here */
+
+            color: #333;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ==============================
+CONTAINER
+============================== */
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        /* ==============================
+TOP BAR (Black)
+============================== */
+        .top-bar {
+            background-color: #000;
+            color: #fff;
+            padding: 12px 0;
+        }
+
+        .top-bar .inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .top-bar .inner .left,
+        .top-bar .inner .right {
+            display: flex;
+            align-items: center;
+        }
+
+        .top-bar .inner .left a {
+            color: #fff;
+            margin-left: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .top-bar .inner .left a:hover {
+            color: #ffd700;
+        }
+
+        /* Social Media Icons Styling */
+        .social-icon {
+            font-size: 20px;
+            /* Size of the icons */
+            margin-left: 15px;
+            gap: 10px;
+            /* Space between icons */
+            color: #f9f5f5;
+            /* Icon color */
+            transition: color 0.3s ease, transform 0.3s ease;
+            /* Smooth transition on hover */
+        }
+
+        .social-icon:hover {
+            color: #1d72b8;
+            /* Change color on hover */
+            transform: scale(1.1);
+            /* Slight scale effect on hover */
+        }
+
+        /* Smaller icons for mobile view */
+        @media (max-width: 768px) {
+            .social-icon {
+                font-size: 18px;
+                /* Slightly smaller icons on mobile */
+                margin-left: 10px;
+                /* Less space between icons */
+            }
+        }
+
+
+        /* ==============================
+MAIN HEADER (Yellow)
+============================== */
+        .main-header {
+            background-color: #ffcc00;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+
+            /* below top bar */
+        }
+
+        .main-header .inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* Left: Logo */
+        .main-header .left a img {
+            height: 60px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .main-header .left a img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Center: Category Dropdown + Search */
+        .main-header .center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Search Group Styling */
+        .search-group {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 30px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        /* Category Dropdown Styling */
+        .category-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Button Styling */
+        .cat-btn {
+            background-color: #213e6a;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .cat-btn i {
+            margin-left: 8px;
+        }
+
+        .cat-btn:hover {
+            background-color: #1b2f4d;
+            transform: scale(1.03);
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            width: 180px;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            display: none;
+            /* Initially hidden */
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+
+        .dropdown-menu li {
+            padding: 8px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu li a {
+            color: #333;
+            font-size: 14px;
+            display: block;
+            transition: background 0.3s ease;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Show dropdown on hover (Desktop) */
+        @media (min-width: 992px) {
+            .category-dropdown:hover .dropdown-menu {
+                display: block;
+            }
+        }
+
+        /* Toggle dropdown on click (Mobile) */
+        @media (max-width: 991px) {
+            .dropdown-menu {
+                display: none;
+            }
+        }
+
+
+        /* Search Box - Larger Input Field */
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input {
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            width: 500px;
+            /* Larger search bar */
+            outline: none;
+        }
+
+        .search-box button {
+            background-color: #213e6a;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .search-box button:hover {
+            background-color: #1b2f4d;
+            transform: scale(1.03);
+        }
+
+        /* Merge dropdown & search with a border between */
+        .search-group>*:not(:last-child) {
+            border-right: 1px solid #ccc;
+        }
+
+        /* Right: Cart & My Account */
+        .main-header .right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .main-header .right a {
+            color: #000;
+            background-color: #fff;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-size: 14px;
+        }
+
+        .main-header .right a:hover {
+            background-color: #333;
+            color: #fff;
+            transform: scale(1.03);
+        }
+
+        .main-header .right a i {
+            margin-right: 5px;
+        }
+
+        /* ==============================
+BOTTOM NAVIGATION BAR (Sticky)
+============================== */
+        .scroll-nav {
+            background: linear-gradient(to top, #87CEEB, #1E90FF);
+            /* Light blue to deeper blue */
+
+            padding: 12px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-nav .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .scroll-nav ul {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .scroll-nav ul li a {
+            color: #f9f8f8;
+            font-weight: bolder;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .scroll-nav ul li a:hover {
+            background-color: #213e6a;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Sticky nav style */
+        .scroll-nav.sticky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 150;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* ==============================
+RESPONSIVE STYLES
+============================== */
+        @media (max-width: 992px) {
+            .top-bar .inner {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+                padding: 10px;
+            }
+
+            .main-header .inner {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .main-header .center {
+                order: 2;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .search-box input {
+                width: 80%;
+            }
+
+            .main-header .right {
+                order: 3;
+            }
+
+            .scroll-nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-box input {
+                width: 200px;
+
+            }
+
+            .search-box button {
+                padding: 8px 12px;
+                /* Smaller padding on mobile */
+            }
+
+            .scroll-nav ul li a {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
+        }
+
+
+        /* Hamburger Menu */
+        .scroll-nav .hamburger {
+            display: none;
+            cursor: pointer;
+
+        }
+
+        .scroll-nav .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+        }
+
+        /* Mobile View */
+        @media (max-width: 768px) {
+            .scroll-nav {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+            }
+
+            .scroll-nav .container {
+                display: none;
+                width: 100%;
+                text-align: center;
+            }
+
+            .scroll-nav .container.active {
+                display: block;
+                /* Shows the menu when 'active' is added */
+            }
+
+            .scroll-nav .hamburger {
+                display: block;
+                cursor: pointer;
+
+            }
+
+            .scroll-nav .hamburger div {
+                width: 25px;
+                height: 3px;
+                background-color: rgb(243, 237, 237);
+                margin: 5px 0;
+
+            }
+        }
+
+
+
+        /* Main Container */
+        .containers {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            gap: 60px;
+            padding-top: 60px;
+            opacity: 0;
+            flex-wrap: wrap;
+        }
+
+        /* 3D Carousel */
+        .carousel-container {
+            width: 380px;
+            height: 380px;
+            perspective: 1200px;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .carousel img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        .carousel img:nth-child(1) {
+            transform: rotateY(0deg) translateZ(300px);
+        }
+
+        .carousel img:nth-child(2) {
+            transform: rotateY(120deg) translateZ(300px);
+        }
+
+        .carousel img:nth-child(3) {
+            transform: rotateY(240deg) translateZ(300px);
+        }
+
+        .carousel-container {
+            cursor: pointer;
+            /* Indicates interactivity */
+        }
+
+        .carousel img {
+            transition: transform 0.5s ease;
+        }
+
+
+        /* Booking Form */
+        .booking-form {
+
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            max-width: 500px;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.1ms ease-in-out;
+            margin-left: 200px;
+            margin-top: 50px;
+        }
+
+        .booking-form h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 30px;
+            background: linear-gradient(150deg, #ecf0f1, #34495e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(44, 62, 80, 0.9);
+            color: #ecf0f1;
+            outline: none;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .form-group textarea {
+            height: 150px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            background: rgba(52, 152, 219, 0.7);
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            pointer-events: none;
+            transition: 0.3s ease;
+            color: #bbb;
+        }
+
+        .form-group input:focus+label,
+        .form-group input:valid+label,
+        .form-group select:valid+label,
+        .form-group textarea:focus+label {
+            top: -10px;
+            left: 12px;
+            font-size: 14px;
+            color: #ecf0f1;
+        }
+
+        .booking-form button {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            background: #2980b9;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .booking-form button:hover {
+            background: #1f6394;
+            transform: scale(1.05);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #3498db;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .carousel-container {
+                width: 280px;
+                height: 280px;
+            }
+
+            .booking-form {
+                margin-left: 0;
+                margin-top: 20px;
+                padding: 30px;
+            }
+        }
+
+
+        /* Footer Styling */
+        footer {
+            background-color: #5aa1ed;
+            /* Light Blue background */
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            /* To make sure footer stays in place */
+            margin-top: 100px;
+        }
+
+        /* Footer Container */
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Footer Logo */
+        .footer-logo img {
+            width: 120px;
+            height: auto;
+            border-radius: 50%;
+            border: 2px solid white;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-logo p {
+            font-size: 16px;
+            font-weight: 300;
+            margin-top: 10px;
+        }
+
+        /* Footer Links */
+        .footer-links h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-links ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-links ul li a {
+            color: whitesmoke;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 0;
+            display: block;
+            transition: 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: #213e6a;
+            padding-left: 10px;
+        }
+
+        /* Footer Contact */
+        .footer-contact h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        /* Social Icons */
+        .social-icons a {
+            color: white;
+            font-size: 24px;
+            margin: 0 10px;
+            transition: transform 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #00ffea;
+            transform: scale(1.2);
+        }
+
+        /* Copyright Section */
+        .footer-copyright {
+            background-color: #2067a0;
+            /* Darker blue for the copyright section */
+            padding: 12px 0;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-logo img {
+                width: 100px;
+            }
+
+            .footer-links,
+            .footer-contact,
+            .footer-social {
+                text-align: center;
+            }
+
+            .footer-links ul {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container inner">
+            <div class="left">
+                <span>Call Now:</span>
+                <a href="tel:123-444-6666">123-444-6666</a>
+            </div>
+            <div class="right">
+                <!-- Replaced Free Shipping with Social Media Icons -->
+                <a href="https://www.facebook.com" target="_blank" class="social-icon"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a href="https://www.twitter.com" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com" target="_blank" class="social-icon"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="main-header">
+        <div class="container inner">
+            <!-- Left: Logo -->
+            <div class="left">
+                <a href="#"><img src="{% static 'images/logo.jpg' %}" alt="Babyland Joy"></a>
+            </div>
+            <!-- Center: Category Dropdown + Search Box -->
+            <div class="center">
+                <div class="search-group">
+                    <!-- <div class="category-dropdown">
+            <button class="cat-btn" onclick="toggleDropdown(event)">All Categories <i
+                class="fa fa-angle-down"></i></button>
+            <ul class="dropdown-menu" id="cat-menu">
+              <li><a href="#">Category 1</a></li>
+              <li><a href="#">Category 2</a></li>
+              <li><a href="#">Category 3</a></li>
+              <li><a href="#">Category 4</a></li>
+            </ul>
+          </div> -->
+
+                    <div class="search-box">
+                        <form action="#" method="GET">
+                            <input type="text" placeholder="Search your product..." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Right: Cart & My Account -->
+            <div class="right">
+                <a href="{% url 'cart_view' %}"><i class="fa fa-shopping-cart"></i> Cart</a>
+                <a href="{% url 'login' %}"><i class="fa fa-user"></i> My Account</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION BAR (Below Main Header) -->
+    <nav class="scroll-nav" id="scroll-nav">
+        <div class="container">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/blog">Blog</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="/users/logout">Logout</a></li>
+                {% else %}
+                <li><a href="/users/login">Sign In</a></li>
+                <li><a href="/users/register">Register</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+
+
+
+    <!-- Main Container -->
+    <div class="containers" id="mainContainer">
+
+        <!-- 3D Carousel -->
+        <div class="carousel-container">
+            <div class="carousel" id="carousel">
+                <img src="{{ product.image.url }}" alt="Front">
+                <img src="{{ product.image.url }}" alt="Side">
+                <img src="{{ product.image.url }}" alt="Back">
+            </div>
+        </div>
+
+        <!-- Booking Form -->
+        <div class="booking-form" id="bookingForm">
+            <h1>Book Your Product</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- Name -->
+                <div class="form-group">
+                    {{ form.name }}
+                    <label for="id_name">Full Name</label>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    {{ form.email }}
+                    <label for="id_email">Email</label>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                    {{ form.phone }}
+                    <label for="id_phone">Phone</label>
+                </div>
+
+                <!-- Address -->
+                <div class="form-group">
+                    {{ form.address }}
+                    <label for="id_address">Address</label>
+                </div>
+
+                <button type="submit">Book Now</button>
+            </form>
+
+            <a href="{% url 'product_detail' product.id %}" class="back-link">⬅️ Back to Product</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <!-- Footer Logo Section -->
+            <div class="footer-logo">
+                <img src="{% static 'images/logo.jpg' %}" alt="Babyland Joy Logo">
+                <p>Babyland Joy - Bringing Smiles to Every Child</p>
+            </div>
+
+            <!-- Footer Navigation Links -->
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <!-- <li><a href="/">Home</a></li> -->
+                    <li><a href="{% url 'about_us' %}">About Us</a></li>
+                    <li><a href="/gallery">Gallery</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Footer Contact Section -->
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>📍 New Road, Kathmandu, Nepal</p>
+                <p>📞 01-5332714,9801027342, 9802857085</p>
+                <p>📧 baabylandjoy@gmail.com</p>
+            </div>
+
+            <!-- Footer Social Media Section -->
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank" class="fab fa-facebook"></a>
+                    <a href="https://twitter.com" target="_blank" class="fab fa-twitter"></a>
+                    <a href="https://instagram.com" target="_blank" class="fab fa-instagram"></a>
+                    <a href="https://youtube.com" target="_blank" class="fab fa-youtube"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright Section at the Bottom -->
+        <div class="footer-copyright">
+            <p>&copy; 2025 Babyland Joy. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- GSAP Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        // Animate carousel rotation
+        const carouselAnimation = gsap.to("#carousel", {
+            rotationY: 360,
+            repeat: -1,
+            duration: 20,
+            ease: "linear"
+        });
+
+        // Pause on hover, resume on mouse leave
+        const carousel = document.querySelector("#carousel");
+
+        carousel.addEventListener("mouseenter", () => {
+            carouselAnimation.pause();
+            gsap.to(carousel, { scale: 1, duration: 0.5, ease: "power2.out" }); // Zoom in effect
+        });
+
+        carousel.addEventListener("mouseleave", () => {
+            carouselAnimation.resume();
+            gsap.to(carousel, { scale: 1, duration: 0.5, ease: "power2.in" }); // Zoom out effect
+        });
+
+        // Fade-in main container and booking form
+        gsap.to("#mainContainer", { opacity: 1, duration: 1 });
+        gsap.to("#bookingForm", { y: 0, opacity: 1, duration: 1.2, delay: 0.5 });
+
+
+        // Detect elements on scroll and add 'visible' class for animations
+        const elements = document.querySelectorAll('.scroll-fade-in');
+
+        window.addEventListener('scroll', () => {
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (rect.top >= 0 && rect.top <= window.innerHeight) {
+                    element.classList.add('visible');
+                }
+            });
+        });
+        // Function to toggle the dropdown menu on mobile
+        function toggleDropdown(event) {
+            event.stopPropagation(); // Prevents the event from bubbling up to parent elements
+            var menu = document.getElementById("cat-menu");
+
+            // Toggle the visibility of the dropdown menu
+            if (menu.style.display === "none" || menu.style.display === "") {
+                menu.style.display = "block";
+            } else {
+                menu.style.display = "none";
+            }
+        }
+
+        // Close the dropdown menu when clicking outside of it
+        document.addEventListener("click", function (event) {
+            var menu = document.getElementById("cat-menu");
+            if (menu && !menu.contains(event.target) && !event.target.matches(".cat-btn")) {
+                menu.style.display = "none";
+            }
+        });
+
+
+        // Sticky Navigation: When scrolling past the main header, add sticky class to nav
+        window.addEventListener("scroll", function () {
+            var scrollNav = document.getElementById("scroll-nav");
+            var mainHeader = document.querySelector(".main-header");
+            if (window.pageYOffset > mainHeader.offsetHeight) {
+                scrollNav.classList.add("sticky");
+            } else {
+                scrollNav.classList.remove("sticky");
+            }
+        });
+
+
+        // JavaScript function to toggle the menu
+        function toggleMenu() {
+            var menu = document.querySelector('.scroll-nav .container');
+            menu.classList.toggle('active');
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        // ScrollReveal animation for fade-in effects
+        ScrollReveal().reveal('.section', {
+            duration: 1200,
+            distance: '50px',
+            opacity: 0,
+            easing: 'ease-out',
+            interval: 200
+        });
+        ScrollReveal().reveal('.section-image', {
+            delay: 500,
+            opacity: 0,
+            distance: '30px',
+            scale: 1.05,
+            easing: 'ease-out',
+        });
+
+
+    </script>
+
+</body>
+
+</html>

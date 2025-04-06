@@ -1,0 +1,253 @@
+<!-- products/templates/products/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}My Site{% endblock %}</title>
+  <!-- Include your CSS and other head elements -->
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  {% load static %}
+  <!-- Link to your base CSS file for the products app -->
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+  {% block css %} <!-- Placeholder for extra CSS in child templates -->
+
+
+  {% endblock %}
+</head>
+
+<body>
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container inner">
+      <div class="left">
+        <span>Call Now:</span>
+        <a href="tel:123-444-6666">+977-9801027342</a>
+      </div>
+      <div class="right">
+        <a href="https://www.facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.tiktok.com/@babylandjoy?_t=ZS-8ukx4vCYGmO&_r=1" target="_blank" class="social-icon"><i
+            class="fab fa-tiktok"></i></a>
+        <a href="https://www.instagram.com/babylandjoy?igsh=aWhqM2tjaDk1MGV3" target="_blank" class="social-icon"><i
+            class="fab fa-instagram"></i></a>
+        <a href="https://youtube.com/@babylandjoy?si=CVmJ2hDFxqDGv7jV" target="_blank" class="social-icon"><i
+            class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER -->
+  <header class="main-header">
+    <div class="container inner">
+      <div class="left">
+        <a href="#"><img src="{% static 'images/logo.jpg' %}" alt="Babyland Joy"></a>
+      </div>
+      <div class="center">
+        <div class="search-group">
+          <div class="search-box">
+            <form action="#" method="GET">
+              <input type="text" placeholder="Search your product..." name="search">
+              <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <a href="{% url 'cart_view' %}"><i class="fa fa-shopping-cart"></i> Cart</a>
+        <a href="{% url 'login' %}"><i class="fa fa-user"></i> My Account</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="scroll-nav" id="scroll-nav">
+    <div class="container">
+      <ul>
+        {% if not request.path|slice:":5" == '/cart' %}
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about_us' %}">About Us</a></li>
+        <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+        {% endif %}
+        {# Short Navigation Links for Home and Products #}
+        {% if request.path == '/' or request.path == '/products/' %}
+        <li><a href="#our-team">Team</a></li>
+        <li><a href="#products-container">Products</a></li>
+        <li><a href="#welcome-section">Our Message</a></li>
+        {% endif %}
+
+
+        <!-- <li><a href="/gallery">Gallery</a></li>
+        <li><a href="/blog">Blog</a></li> -->
+        {% if user.is_authenticated %}
+        <li><a href="#" onclick="showLogoutModal(); return false;" id="logout">Logout</a></li>
+
+        {% else %}
+        <li><a href="/users/login">Sign In</a></li>
+        <li><a href="/users/register">Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main>
+    {% block content %}
+    <!-- Page specific content will go here -->
+    {% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <!-- Footer Logo Section -->
+      <div class="footer-logo">
+        <img src="{% static 'images/logo.jpg' %}" alt="Babyland Joy Logo">
+        <p>Creating Happiness, Ensuring Safety
+
+        </p>
+      </div>
+
+      <!-- Footer Navigation Links -->
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'about_us' %}">About Us</a></li>
+          {% if request.path == '/' or request.path == '/products/' %}
+          <li><a href="#our-team">Team</a></li>
+          <li><a href="#products-container">Products</a></li>
+          <li><a href="#welcome-section">Our Message</a></li>
+          {% endif %}
+          <!-- <li><a href="/gallery">Gallery</a></li>
+          <li><a href="/blog">Blog</a></li> -->
+          <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Footer Contact Section -->
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>📍 New Road, Kathmandu, Nepal</p>
+        <p>📞 01-5332714,9801027342, 9802857085</p>
+        <p>📧 baabylandjoy@gmail.com</p>
+      </div>
+
+      <!-- Footer Social Media Section -->
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank" class="fab fa-facebook"></a>
+          <a href="https://www.tiktok.com/@babylandjoy?_t=ZS-8ukx4vCYGmO&_r=1" target="_blank"
+            class="fab fa-tiktok"></a>
+          <a href="https://www.instagram.com/babylandjoy?igsh=aWhqM2tjaDk1MGV3" target="_blank"
+            class="fab fa-instagram"></a>
+          <a href="https://youtube.com/@babylandjoy?si=CVmJ2hDFxqDGv7jV" target="_blank" class="fab fa-youtube"></a>
+        </div>
+      </div>
+    </div>
+    <!-- Copyright Section -->
+    <div class="footer-copyright">
+      <p>&copy; 2025 Babyland Joy. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <script>
+    // Detect elements on scroll and add 'visible' class for animations
+    const elements = document.querySelectorAll('.scroll-fade-in');
+
+    window.addEventListener('scroll', () => {
+      elements.forEach(element => {
+        const rect = element.getBoundingClientRect();
+        if (rect.top >= 0 && rect.top <= window.innerHeight) {
+          element.classList.add('visible');
+        }
+      });
+    });
+    // Function to toggle the dropdown menu on mobile
+    function toggleDropdown(event) {
+      event.stopPropagation(); // Prevents the event from bubbling up to parent elements
+      var menu = document.getElementById("cat-menu");
+
+      // Toggle the visibility of the dropdown menu
+      if (menu.style.display === "none" || menu.style.display === "") {
+        menu.style.display = "block";
+      } else {
+        menu.style.display = "none";
+      }
+    }
+
+    // Close the dropdown menu when clicking outside of it
+    document.addEventListener("click", function (event) {
+      var menu = document.getElementById("cat-menu");
+      if (menu && !menu.contains(event.target) && !event.target.matches(".cat-btn")) {
+        menu.style.display = "none";
+      }
+    });
+
+
+    // Sticky Navigation: When scrolling past the main header, add sticky class to nav
+    window.addEventListener("scroll", function () {
+      var scrollNav = document.getElementById("scroll-nav");
+      var mainHeader = document.querySelector(".main-header");
+      if (window.pageYOffset > mainHeader.offsetHeight) {
+        scrollNav.classList.add("sticky");
+      } else {
+        scrollNav.classList.remove("sticky");
+      }
+    });
+
+
+    // JavaScript function to toggle the menu
+    function toggleMenu() {
+      var menu = document.querySelector('.scroll-nav .container');
+      menu.classList.toggle('active');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    // ScrollReveal animation for fade-in effects
+    ScrollReveal().reveal('.section', {
+      duration: 1200,
+      distance: '50px',
+      opacity: 0,
+      easing: 'ease-out',
+      interval: 200
+    });
+    ScrollReveal().reveal('.section-image', {
+      delay: 500,
+      opacity: 0,
+      distance: '30px',
+      scale: 1.05,
+      easing: 'ease-out',
+    });
+
+
+    // This script will prevent the user from going back to the previous page after logging out.
+    if (window.history && window.history.pushState) {
+      window.history.pushState(null, null, window.location.href);
+      window.onpopstate = function () {
+        window.history.pushState(null, null, window.location.href);
+      };
+    }
+
+  </script>
+</body>
+
+</html>

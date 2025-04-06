@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Successful</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #34e89e, #0f7c99);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 1; /* Ensure content is visible from the start */
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        a {
+            font-size: 1.1rem;
+            text-decoration: none;
+            color: #130303;
+            padding: 12px 25px;
+            border-radius: 25px;
+            background: #34e8e8;
+            transition: background 0.3s ease-in-out;
+        }
+
+        a:hover {
+            background: #0f7c99;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Booking Successful!</h1>
+        <p>Thank you for booking your product. We'll contact you soon.</p>
+        <a href="{% url 'home' %}">⬅️ Back to Home</a>
+    </div>
+
+    <!-- GSAP Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script>
+        window.onload = () => {
+            gsap.from(".container", { scale: 0.9, duration: 0.6, ease: "power2.out" });
+            gsap.from("h1", { y: -20, duration: 0.5, ease: "power2.out" });
+            gsap.from("p", { y: -20, duration: 0.5, delay: 0.2, ease: "power2.out" });
+            gsap.from("a", { y: -10, duration: 0.5, delay: 0.4, ease: "power2.out" });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{% extends 'products/base_generic.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/add_product.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <div class="card">
+    <div class="card-header">
+      <h2>Add Product</h2>
+    </div>
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data" class="product-form">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_name" class="form-label">Product Name</label>
+          {{ form.name }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_model_no" class="form-label">Model No</label>
+          {{ form.model_no }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_size" class="form-label">Size</label>
+          {{ form.size }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_price" class="form-label">Price</label>
+          {{ form.price }}
+        </div>
+
+        <div class="form-group image-upload-group">
+          <label for="id_image" class="form-label">Choose Image</label>
+          {{ form.image }}
+          <div id="image-preview-container" class="image-preview-container">
+            <img id="image-preview" src="#" alt="Image Preview" class="image-preview">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <div class="back-dashboard-container">
+          <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript for Image Preview -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const fileInput = document.getElementById('id_image');
+    const imagePreviewContainer = document.getElementById('image-preview-container');
+    const imagePreview = document.getElementById('image-preview');
+    
+    fileInput.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          imagePreview.src = e.target.result;
+          imagePreviewContainer.style.display = 'block';
+          setTimeout(() => imagePreview.style.opacity = 1, 100);
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+</script>
+{% endblock %}

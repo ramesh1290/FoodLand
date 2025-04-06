@@ -1,0 +1,64 @@
+{% extends 'products/base_generic.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/add_hero_image.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Title Section -->
+    <h2 class="text-center my-4">Add Hero Image</h2>
+
+    <!-- Form to Add Hero Image -->
+    <form method="post" enctype="multipart/form-data" class="hero-form">
+        {% csrf_token %}
+
+        <!-- Image Preview Section -->
+        <div id="image-preview-container" class="image-preview-container mb-3" style="display:none;">
+            <img id="image-preview" src="#" alt="Image Preview" class="image-preview">
+        </div>
+
+        <!-- File Input Field for Image Upload -->
+        <div class="form-group">
+            <label for="id_image" class="form-label">Choose Image</label>
+            {{ form.image }}
+        </div>
+
+        <!-- Caption Field -->
+        <div class="form-group">
+            <label for="id_caption" class="form-label">Caption</label>
+            {{ form.caption }}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-lg">Save</button>
+
+        <!-- Back to Dashboard Button -->
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-lg">Back to Dashboard</a>
+    </form>
+</div>
+
+<!-- Inline JavaScript for Image Preview -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const fileInput = document.getElementById('id_image');
+        const imagePreviewContainer = document.getElementById('image-preview-container');
+        const imagePreview = document.getElementById('image-preview');
+
+        fileInput.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    imagePreviewContainer.style.display = 'block';
+                    setTimeout(() => imagePreview.style.opacity = 1, 100);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
+
+{% endblock %}

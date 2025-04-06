@@ -1,0 +1,80 @@
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block title %}About Us - Babyland Joy{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/about_us.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="about-container">
+
+  <!-- About Vision Section -->
+  <div class="about-section fade-in">
+    <img src="{% static 'images/playground.jpg' %}" alt="Our Vision" class="about-img">
+    <div class="about-text">
+      <h2>Our Vision</h2>
+      <p>At BABYLANDJOY, we believe that play is an essential part of childhood development. Through imaginative play, children can explore their environment, develop motor skills, and build strong relationships.</p>
+    </div>
+  </div>
+
+  <!-- About Mission Section -->
+  <div class="about-section fade-in">
+    <img src="{% static 'images/kids_playing.jpg' %}" alt="Our Mission" class="about-img">
+    <div class="about-text">
+      <h2>Our Mission</h2>
+      <p>Our mission is to design and deliver innovative play spaces that not only bring joy but also ensure the utmost safety for children of all ages.</p>
+    </div>
+  </div>
+
+  <!-- Commitment to Quality Section -->
+  <div class="about-section fade-in">
+    <img src="{% static 'images/equipment.jpg' %}" alt="Quality and Safety" class="about-img">
+    <div class="about-text">
+      <h2>Commitment to Quality and Safety</h2>
+      <p>All our playground equipment is meticulously designed and manufactured using high-quality, durable materials, ensuring they meet all safety regulations.</p>
+    </div>
+  </div>
+
+  <!-- Customer-Centric Approach Section -->
+  <div class="about-section fade-in">
+    <img src="{% static 'images/image1.png' %}" alt="Customer-Centric Approach" class="about-img">
+    <div class="about-text">
+      <h2>Customer-Centric Approach</h2>
+      <p>We strive to provide exceptional customer service, assisting in selecting the right equipment for your space while ensuring a seamless installation experience.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Register ScrollTrigger plugin with GSAP
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate each about-section when it scrolls into view
+    gsap.utils.toArray('.about-section').forEach((section, index) => {
+      gsap.fromTo(
+        section,
+        { opacity: 0, y: 50 }, // Starting state (invisible and below)
+        {
+          opacity: 1,
+          y: 0, // Ending state (visible and in place)
+          duration: 1,
+          delay: index * 0.2, // Staggered delay based on section index
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 80%', // Trigger animation when the section is 80% visible in the viewport
+            end: 'top 60%',
+            scrub: true, // Smooth animation when scrolling
+          }
+        }
+      );
+    });
+  });
+</script>
+
+{% endblock %}

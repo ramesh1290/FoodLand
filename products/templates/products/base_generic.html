@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Admin Panel</title>
+    {% load static %}
+    <!-- Import Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/base_generic.css' %}">
+    <!-- Logout Modal CSS -->
+    <link rel="stylesheet" href="{% static 'css/logout_modal.css' %}">
+    {% block css %}{% endblock %}
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.1/gsap.min.js"></script>
+</head>
+
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="header">
+        <h1>Admin Dashboard</h1>
+        <div class="hamburger-container">
+            <div class="hamburger-bar"></div>
+            <div class="hamburger-bar"></div>
+            <div class="hamburger-bar"></div>
+        </div>
+    </header>
+
+    <!-- Main content wrapper -->
+    <div class="wrapper">
+        {% if request.path == '/products/dashboard/' %}
+        <!-- Sidebar Section -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#" class="sidebar-link"><i class="bi bi-house-door"></i> Dashboard</a></li>
+                <li><a href="#hero-images" class="sidebar-link"><i class="bi bi-images"></i> Hero Images</a></li>
+                <li><a href="#our-products" class="sidebar-link"><i class="bi bi-box"></i> Our Products</a></li>
+                <li><a href="#our-team" class="sidebar-link"><i class="bi bi-person-circle"></i> Our Team</a></li>
+                <!-- Logout link triggers the modal -->
+                {% if user.is_authenticated %}
+                <li><a href="#" id="logout-link" class="sidebar-link"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                </li>
+                {% endif %}
+            </ul>
+        </aside>
+        {% endif %}
+
+        <!-- Main Content Area -->
+        <div class="content-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        {% block content %}
+                        <h2>Content goes here</h2>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <h2 class="modal-title">Confirm Logout</h2>
+            <p class="modal-message">Are you sure you want to logout?</p>
+            <div class="modal-actions">
+                <a href="{% url 'logout' %}" class="btn btn-logout">Yes, Logout</a>
+                <button class="btn btn-cancel" id="cancel-logout">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Admin Dashboard - All Rights Reserved</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Sidebar toggle for mobile
+        const hamburgerToggle = document.querySelector('.hamburger-container');
+        const sidebar = document.querySelector('.sidebar');
+        const hamburgerBars = document.querySelectorAll('.hamburger-bar');
+
+        hamburgerToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            if (sidebar.classList.contains('active')) {
+                gsap.to(".sidebar", { x: 0, duration: 0.5, ease: "power3.out" });
+            } else {
+                gsap.to(".sidebar", { x: "-100%", duration: 0.5, ease: "power3.out" });
+            }
+            hamburgerBars.forEach(bar => bar.classList.toggle('active'));
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('active');
+                hamburgerBars.forEach(bar => bar.classList.remove('active'));
+                gsap.set(".sidebar", { x: 0 });
+            } else {
+                if (!sidebar.classList.contains('active')) {
+                    gsap.set(".sidebar", { x: "-100%" });
+                }
+            }
+        });
+
+        // Logout Modal JavaScript
+        const modal = document.getElementById('logoutModal');
+        const logoutLink = document.getElementById('logout-link');
+        const closeModal = document.getElementById('close-modal');
+        const cancelLogout = document.getElementById('cancel-logout');
+
+        // Ensure the modal is hidden on page load
+        window.addEventListener('load', () => {
+            modal.style.display = 'none'; // Make sure the modal is hidden when the page loads
+        });
+
+        // Show the modal when logout link is clicked
+        logoutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.style.display = 'block'; // Show the modal
+        });
+
+        // Hide the modal when the close icon is clicked
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none'; // Hide the modal
+        });
+
+        // Hide the modal when cancel button is clicked
+        cancelLogout.addEventListener('click', () => {
+            modal.style.display = 'none'; // Hide the modal
+        });
+
+        // Hide modal if user clicks outside of modal content
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none'; // Hide the modal if the user clicks outside
+            }
+        });
+
+    </script>
+</body>
+
+</html>

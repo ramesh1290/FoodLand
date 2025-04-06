@@ -1,421 +1,396 @@
+{% extends 'products/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Babyland Joy - Home</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+{% block title %}Babyland Joy - Home{% endblock %}
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+{% block css %}
+<!-- Link to your home-specific CSS -->
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/team.css' %}"> <!-- Add the team.css link here -->
+{% endblock %}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    html,
-    body {
-      background-color: #f8f9fa;
-      color: #333;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-
-
-    }
-
-    /* Navbar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #ffcc00;
-      padding: 15px 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Logo Styling */
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo a {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
-
-    .logo img {
-      height: 60px;
-      /* Adjust as needed */
-      width: 120px;
-      /* Adjust for a perfect oval shape */
-      border-radius: 50%;
-      /* Makes it circular */
-      object-fit: cover;
-      /* Ensures the image covers the space properly */
-      transition: transform 0.3s ease-in-out;
-      border: 3px solid white;
-      /* Optional: adds a white border for better visibility */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      /* Optional: slight shadow for better appearance */
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /* 
-    .navbar .logo {
-      font-size: 22px;
-      font-weight: bold;
-      color: #333;
-    } */
-
-    .navbar .nav-links {
-      display: flex;
-      gap: 15px;
-    }
-
-    .navbar .nav-links a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 600;
-      padding: 10px 15px;
-      border-radius: 5px;
-      font-size: 18px;
-      transition: 0.3s ease-in-out;
-    }
-
-    .navbar .nav-links a:hover {
-      background: rgba(255, 102, 0, 0.8);
-      color: white;
-      transform: scale(1.1);
-    }
-
-    /* Hero Section (Centered Image Slider) */
-    .hero-slider {
-      width: 100%;
-      height: 600px;
-      /* Increased height for better visibility */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px 0;
-      overflow: hidden;
-    }
-
-    .swiper {
-      width: 90%;
-      height: 100%;
-      border-radius: 15px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .swiper-slide {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .swiper-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      /* Keeps images fully visible without cropping */
-      border-radius: 15px;
-    }
-
-    .swiper-pagination-bullet {
-      background: #ff6600;
-    }
-
-    .swiper-button-prev,
-    .swiper-button-next {
-      color: #ff6600;
-    }
-
-    /* Products Section */
-    .products-container {
-      padding: 50px 20px;
-      text-align: center;
-
-
-    }
-
-    .products-container h1 {
-      font-size: 32px;
-      color: #ff6600;
-      margin-bottom: 20px;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .product-card {
-      background: white;
-      border-radius: 10px;
-      overflow: hidden;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .product-card h2 {
-      font-size: 20px;
-      margin: 15px 0 10px;
-    }
-
-    .product-card p {
-      font-size: 18px;
-      font-weight: bold;
-      color: #ff6600;
-    }
-
-    .product-card a {
-      display: block;
-      text-decoration: none;
-      color: white;
-      background: #ff6600;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .product-card a:hover {
-      background: rgba(255, 102, 0, 0.8);
-    }
-
-    /* Footer */
-    /* Footer Styling */
-    footer {
-      background: #ffcc00;
-      color: black;
-      padding: 30px 20px;
-      text-align: center;
-      margin-top: auto;
-    }
-
-    .main-content {
-      flex: 1;
-      /* Pushes the footer down */
-    }
-
-    .footer-container {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .footer-logo {
-      text-align: left;
-    }
-
-    .footer-logo img {
-      width: 120px;
-      height: auto;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid white;
-    }
-
-    .footer-contact p {
-      margin: 5px 0;
-      font-size: 16px;
-    }
-
-    .footer-contact i {
-      color: #333;
-      margin-right: 10px;
-    }
-
-    .footer-payments h3,
-    .footer-social h3 {
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-
-    .footer-payments img {
-      height: 40px;
-      margin: 5px;
-    }
-
-    .footer-social a {
-      font-size: 24px;
-      color: black;
-      margin: 0 10px;
-      transition: 0.3s;
-    }
-
-    .footer-social a:hover {
-      color: #ff6600;
-    }
-
-    .footer-bottom {
-      background: black;
-      color: #ffffff;
-      padding: 20px;
-      width: 100%;
-      font-size: 14px;
-      margin-top: 29px;
-      position: relative;
-      bottom: 0;
-    }
-
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero-slider {
-        height: 350px;
-      }
-
-      .swiper {
-        width: 90%;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <nav class="navbar">
-    <div class="logo">
-      <img src="{% static 'images/logo.jpg' %}" alt="Babyland Joy" style="height: 50px;">
-    </div>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/cart/">Cart</a>
-      <a href="/orders/">Orders</a>
-      <a href="/users/login/">Login</a>
-    </div>
-  </nav>
-
-
-  <!-- Hero Section (Centered Image Slider) -->
-  <div class="hero-slider">
-    <div class="swiper">
-      <div class="swiper-wrapper">
-        {% for image in hero_images %}
-        <div class="swiper-slide">
-          <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+{% block content %}
+<!-- Hero Section (Advanced Image Slider) -->
+<div class="hero-slider">
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      {% for image in hero_images %}
+      <div class="swiper-slide">
+        <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+        <!-- Gradient Overlay -->
+        <!-- <div class="gradient-overlay"></div> -->
+        <!-- Dynamic Caption -->
+        <div class="swiper-caption">
+          <h1 class="caption-title">{{ image.caption }}</h1>
+          <p class="caption-subtitle">Explore amazing products for kids</p>
         </div>
-        {% endfor %}
       </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-    </div>
-  </div>
-
-  <!-- Products Section -->
-  <section class="products-container">
-    <h1>Our Products</h1>
-    <div class="products-grid">
-      {% for product in products %}
-      <div class="product-card">
-        <img src="{{ product.image.url }}" alt="{{ product.name }}">
-        <h2>{{ product.name }}</h2>
-        <p>Rs {{ product.price }}</p>
-        <a href="{% url 'product_detail' product.id %}">View</a>
-        <a href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
-      </div>
-      {% empty %}
-      <p>No products available.</p>
       {% endfor %}
     </div>
+    <!-- Navigation & Pagination -->
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</div>
 
+<!-- Products Section -->
+<section id="products-container" class="products-container">
+  <h1>Our Products</h1>
+  <div class="products-grid">
+    {% for product in page_obj %}
+    <div class="product-card bounce-in">
+      <img src="{{ product.image.url }}" alt="{{ product.name }}">
+      <h2>{{ product.name }}</h2>
+      <a href="{% url 'product_detail' product.id %}">View</a>
+      <a href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
+      <a href="{% url 'book_now' product.id %}">Book Now</a>
+    </div>
+    {% empty %}
+    <p>No products available.</p>
+    {% endfor %}
+  </div>
+  <!-- Paginator -->
+  <div class="paginator">
+    {% if page_obj.has_previous %}
+    <a href="?page=1" class="page-link first">&laquo; First</a>
+    <a href="?page={{ page_obj.previous_page_number }}" class="page-link prev">‹ Previous</a>
+    {% endif %}
+    <div class="page-numbers">
+      {% for num in page_obj.paginator.page_range %}
+      {% if num == page_obj.number %}
+      <span class="page-number active">{{ num }}</span>
+      {% else %}
+      <a href="?page={{ num }}" class="page-number">{{ num }}</a>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}" class="page-link next">Next ›</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link last">Last &raquo;</a>
+    {% endif %}
+  </div>
 
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/9779801027342" class="whatsapp-button" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip-text">Call us on WhatsApp</span>
+  </a>
 
-  </section>
-
-  <footer>
-    <div class="footer-container">
-      <!-- Left Section (Logo & Contact Info) -->
-      <div class="footer-logo">
-        <img src="{% static 'images/logo.jpg' %}" alt="Babyland Joy">
-        <h2>Babyland Joy</h2>
+  <div class="container" id="#container">
+    <!-- Welcome Section -->
+    <section class="welcome-section section-box" id="welcome-section">
+      <div class="content-container" id="content-container">
+        <div class="text-content">
+          <h1>Welcome to <span>BABYLANDJOY</span></h1>
+          <p>Dear Sir/Madam,</p>
+          <p>
+            We at BABYLANDJOY are passionate about creating safe and exciting play environments for children.
+            We believe that play is the foundation of creativity, learning, and development, which is why we are
+            committed to offering the finest play materials for schools and communities.
+          </p>
+          <div class="extra-content">
+            <p>
+              We would love the opportunity to collaborate with you, bringing our products to your school and
+              enriching your students' playtime with safe, educational, and fun-filled playground experiences.
+            </p>
+            <p>
+              Looking forward to partnering with you!<br>
+              Warm regards,<br>
+              Trust Traders, Kathmandu, Nepal
+            </p>
+          </div>
+          <button class="read-more" onclick="toggleText(this)">Read More</button>
+        </div>
+        <div class="image-content">
+          <img src="{% static 'images/business_collaboration.jpg' %}" alt="Children Playing">
+        </div>
       </div>
+    </section>
 
-      <div class="footer-contact">
-        <h3>Contact Us</h3>
-        <p><i class="fas fa-map-marker-alt"></i> New Road, Kathmandu, Nepal</p>
-        <p><i class="fas fa-phone-alt"></i> 01-5332714 | 9801027342, 9802857085</p>
-        <p><i class="fas fa-envelope"></i> babylandjoy@gmail.com</p>
+    <!-- Company Profile Section -->
+    <section class="company-profile section-box">
+      <div class="content-container">
+        <div class="text-content">
+          <h2>About Us – <span>BABYLANDJOY</span></h2>
+          <h3>Your Partner in Creating Safe Play Spaces</h3>
+          <p><strong>Industry:</strong> Playground Equipment Sales &amp; Services</p>
+          <p><strong>Tagline:</strong> Where Play Meets Safety, Fun, and Learning</p>
+          <div class="extra-content">
+            <p>
+              At BABYLANDJOY, we understand that every child deserves a safe and stimulating space to learn and grow.
+              We offer a wide range of innovative and high-quality playground equipment designed to bring joy and
+              development to children of all ages.
+            </p>
+            <p>
+              Our products are crafted with utmost care, ensuring that each piece is safe, durable, and built to last.
+              We are dedicated to helping schools, communities, and daycare centers create environments that foster
+              creativity, physical activity, and social interaction.
+            </p>
+          </div>
+          <button class="read-more" onclick="toggleText(this)">Read More</button>
+        </div>
+        <div class="image-content">
+          <img src="{% static 'images/equipment.jpg' %}" alt="Playground Equipment">
+        </div>
       </div>
+    </section>
 
-      <!-- Right Section (Payment Partners & Social Links) -->
-      <div class="footer-payments">
-        <h3>Payment Partners</h3>
-        <img src="{% static 'images/ConnectIPS.png' %}" alt="ConnectIPS">
-        <img src="{% static 'images/IMEPAY.png' %}" alt="IMEPAY">
-        <img src="{% static 'images/esewa.png' %}" alt="Esewa">
-        <img src="{% static 'images/khalti.png' %}" alt="Khalti">
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us section-box">
+      <div class="content-container">
+        <div class="text-content">
+          <h2>Why Choose <span>BABYLANDJOY</span>?</h2>
+          <ul>
+            <li><strong>Safety First:</strong> Every product is carefully designed to meet and exceed safety standards.
+            </li>
+            <li><strong>Innovative Designs:</strong> Our playgrounds engage and challenge children, fostering
+              creativity.</li>
+            <li><strong>Tailored Solutions:</strong> Custom designs and equipment tailored for your specific needs.</li>
+          </ul>
+          <div class="extra-content">
+            <p>
+              Every product is carefully designed to meet and exceed safety standards. Our playgrounds engage and
+              challenge children, fostering creativity, and we offer custom designs and equipment tailored to your
+              specific needs.
+            </p>
+            <p>
+              We ensure that your playground environment is not just fun but also safe and developmentally beneficial
+              for children.
+              Our focus is on fostering a balance of safety, fun, and learning.
+            </p>
+          </div>
+          <button class="read-more" onclick="toggleText(this)">Read More</button>
+        </div>
+        <div class="image-content">
+          <img src="{% static 'images/kids_playing.jpg' %}" alt="Kids Playing on Playground">
+        </div>
       </div>
+    </section>
 
-      <div class="footer-social">
-        <h3>Follow Us</h3>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
+    <!-- Our Services Section -->
+    <section class="our-services section-box">
+      <div class="content-container">
+        <div class="text-content">
+          <h2>Our Services</h2>
+          <ul>
+            <li><strong>Free Playground Equipment Installation:</strong> Expert setup to ensure safety and proper
+              functionality.</li>
+            <li><strong>Free Delivery:</strong> Hassle-free, complimentary delivery of all our products.</li>
+            <li><strong>5-Year Repair Services:</strong> Reliable repair services for up to five years after purchase.
+            </li>
+            <li><strong>Safety Features:</strong> Equipment designed with child safety in mind, including
+              impact-absorbing surfaces.</li>
+          </ul>
+          <div class="extra-content">
+            <p>
+              Our playground equipment installation is conducted by professionals who ensure the equipment is safely
+              installed.
+              We provide free delivery services to make the process as easy as possible for you.
+            </p>
+            <p>
+              Additionally, our services include a 5-year repair guarantee for all products to ensure they remain in top
+              condition.
+              We also prioritize safety by designing our equipment with impact-absorbing surfaces and other safety
+              features.
+            </p>
+          </div>
+          <button class="read-more" onclick="toggleText(this)">Read More</button>
+        </div>
+        <div class="image-content">
+          <img src="{% static 'images/playground.jpg' %}" alt="Playground Equipment Installation">
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+<!-- Our Team Section -->
+<div id="our-team" class="our-team">
+  <h2>Meet Our Team</h2>
+  <div class="team-container">
+    {% for member in team_members %}
+    <div class="team-card">
+      <div class="team-image-container">
+        <img src="{{ member.image.url }}" alt="{{ member.name }}">
+      </div>
+      <div class="team-info">
+        <h3>{{ member.name }}</h3>
+        <p>{{ member.position }}</p>
+
       </div>
     </div>
-
-    <!-- Copyright Section -->
-    <div class="footer-bottom">
-      <p>© 2025 Babyland Joy. All rights reserved.</p>
-    </div>
-  </footer>
+    {% endfor %}
+  </div>
+</div>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-  <script>
-    var swiper = new Swiper(".swiper", {
+
+<!-- GSAP via CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<!-- ScrollReveal Library -->
+<script src="https://unpkg.com/scrollreveal"></script>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<!-- Alternate ScrollReveal (if needed) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/scrollreveal/4.0.0/scrollreveal.min.js"></script>
+<!-- GSAP CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+
+<script>
+  // Initialize Swiper slider
+  window.addEventListener('load', () => {
+    const swiper = new Swiper('.swiper', {
       loop: true,
-      autoplay: { delay: 3000, disableOnInteraction: false },
-      pagination: { el: ".swiper-pagination", clickable: true },
-      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+      autoplay: {
+        delay: 7000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on: {
+        init: () => animateSlide(),
+        slideChangeTransitionStart: () => resetAnimation(),
+        slideChangeTransitionEnd: () => animateSlide(),
+      },
     });
 
+    function animateSlide() {
+      const activeSlide = document.querySelector('.swiper-slide-active');
+      // Animate Caption Title
+      gsap.fromTo(
+        activeSlide.querySelector('.caption-title'),
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out' }
+      );
+      // Animate Caption Subtitle with Delay
+      gsap.fromTo(
+        activeSlide.querySelector('.caption-subtitle'),
+        { opacity: 0, x: -100 },
+        { opacity: 1, x: 0, duration: 1.8, delay: 0.5, ease: 'power4.out' }
+      );
+    }
+
+    function resetAnimation() {
+      gsap.set('.caption-title, .caption-subtitle', { opacity: 0 });
+    }
+  });
+
+  // Intersection Observer for product cards (fade-in effect)
+  function handleAnimation(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }
+  const observer = new IntersectionObserver(handleAnimation, { threshold: 0.5 });
+  const productCards = document.querySelectorAll('.product-card');
+  productCards.forEach(card => {
+    observer.observe(card);
+  });
+
+  // Header Hamburger Toggle
+  function toggleMenu() {
+    const navLinks = document.querySelector('.scroll-nav .container ul');
+    navLinks.classList.toggle('active');
+  }
+
+  // Toggle "Read More" text for extra content
+  function toggleText(button) {
+    const extraContent = button.previousElementSibling;
+    if (extraContent.classList.contains('show')) {
+      extraContent.classList.remove('show');
+      button.textContent = 'Read More';
+    } else {
+      extraContent.classList.add('show');
+      button.textContent = 'Read Less';
+    }
+  }
+
+  // WhatsApp Button Scroll Toggle
+  window.addEventListener('scroll', function () {
+    const whatsappButton = document.querySelector('.whatsapp-button');
+    if (!whatsappButton) return;
+    if (window.scrollY > 200) {
+      whatsappButton.style.display = 'flex';
+      setTimeout(() => {
+        whatsappButton.style.opacity = '1';
+      }, 10);
+    } else {
+      whatsappButton.style.opacity = '0';
+      setTimeout(() => {
+        whatsappButton.style.display = 'none';
+      }, 300);
+    }
+  });
+
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // Register ScrollTrigger plugin with GSAP
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate each team card when it scrolls into view
+    gsap.utils.toArray('.team-card').forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { opacity: 0, y: 50 }, // Starting state (invisible and below)
+        {
+          opacity: 1,
+          y: 0, // Ending state (visible and in place)
+          duration: 1,
+          delay: index * 0.2, // Staggered delay based on card index
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 80%', // Trigger animation when the card is 80% visible in the viewport
+            end: 'top 60%',
+            scrub: true, // Smooth animation when scrolling
+          }
+        }
+      );
+    });
+  });
 
 
 
 
 
+  document.addEventListener('DOMContentLoaded', function () {
+    // Register ScrollTrigger plugin with GSAP
+    gsap.registerPlugin(ScrollTrigger);
 
-  </script>
+    // Animate each section when it scrolls into view
+    gsap.utils.toArray('.section-box').forEach((section, index) => {
+      gsap.fromTo(
+        section,
+        { opacity: 0, y: 80 }, // Start: Invisible and 80px down
+        {
+          opacity: 1,
+          y: 0, // End: Fully visible and in position
+          duration: 1,
+          delay: index * 0.2, // Stagger animation
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 80%', // When the section is 80% in the viewport
+            end: 'top 60%',  // When the section reaches 60% of the viewport
+            scrub: true,    // Smooth animation on scroll
+          }
+        }
+      );
+    });
+  });
 
-</body>
 
-</html>
+
+
+</script>
+{% endblock %}

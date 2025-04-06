@@ -1,0 +1,89 @@
+/* Styling for the Our Team section */
+.our-team {
+  background-color: #f4f7fa; /* Light background */
+  padding: 80px 20px;
+}
+
+.our-team h2 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #a694de; /* Dark text for better contrast */
+  letter-spacing: 1px;
+}
+
+.team-container {
+  display: flex;
+  flex-direction: column; /* Vertical layout */
+  align-items: center;
+  gap: 40px;
+  padding: 0 20px;
+}
+
+/* Team Card Styling */
+.team-card {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  max-width: 400px; /* Increased width */
+  text-align: center;
+  width: 100%;
+  opacity: 0; /* Initially hidden */
+  transform: translateY(50px); /* Start from below */
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+/* Larger Image Sizes */
+.team-image-container {
+  width: 250px;  /* Larger image size */
+  height: 250px;
+  margin: 0 auto 20px auto;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.team-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Name and Position Styling */
+.team-info h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-top: 15px;
+}
+
+.team-info p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 5px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .our-team h2 {
+    font-size: 2.5rem;
+  }
+
+  .team-container {
+    gap: 30px;
+  }
+
+  .team-card {
+    max-width: 350px;
+  }
+
+  .team-image-container {
+    width: 200px;
+    height: 200px;
+  }
+}
