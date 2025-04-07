@@ -1,0 +1,177 @@
+/* Container */
+.container {
+  max-width: 600px; /* Form width */
+  margin: 50px auto; /* Centers the container */
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Section */
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Form Styles */
+.hero-form .form-group {
+  margin-bottom: 25px;
+}
+
+.hero-form .form-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Form Input Styles */
+.hero-form input[type="file"],
+.hero-form input[type="text"],
+.hero-form input[type="number"],
+.hero-form textarea,
+.hero-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.hero-form input[type="file"]:focus,
+.hero-form input[type="text"]:focus,
+.hero-form input[type="number"]:focus,
+.hero-form textarea:focus,
+.hero-form select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Image Preview Section */
+.image-preview-container {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 250px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Button Styles */
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: #27ae60; /* Green color */
+  color: white;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.btn-secondary:hover {
+  background-color: #2ecc71;
+  transform: translateY(-2px);
+}
+
+/* Back to Dashboard Container */
+.back-dashboard-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Remove underline on the "Back to Dashboard" button */
+a.btn-secondary {
+  text-decoration: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .hero-form .form-group {
+    margin-bottom: 20px;
+  }
+
+  .hero-form .form-label {
+    font-size: 0.9rem;
+  }
+
+  .hero-form input[type="file"],
+  .hero-form input[type="text"],
+  .hero-form input[type="number"],
+  .hero-form textarea,
+  .hero-form select {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .hero-form input[type="file"],
+  .hero-form input[type="text"],
+  .hero-form input[type="number"],
+  .hero-form textarea,
+  .hero-form select {
+    padding: 8px;
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    font-size: 0.95rem;
+    padding: 8px 15px;
+  }
+}

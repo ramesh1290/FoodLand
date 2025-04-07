@@ -1,0 +1,100 @@
+
+
+/* Card Container */
+.form-container {
+  max-width: 500px;
+  margin-top: 50px;
+  margin-left: 300px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Form Groups */
+.team-form .form-group {
+  margin-bottom: 15px;
+}
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+.team-form input[type="text"],
+.team-form input[type="file"],
+.team-form select,
+.team-form textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+.team-form input:focus,
+.team-form select:focus,
+.team-form textarea:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Image Preview */
+.image-preview-container {
+  display: none;
+  margin-top: 10px;
+  text-align: center;
+}
+.image-preview {
+  max-width: 100%;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+}
+.btn-primary {
+  background: #3498db;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.btn-primary:hover {
+  background: #2980b9;
+}
+.btn-green {
+  background: #27ae60;
+  color: #fff;
+}
+.btn-green:hover {
+  background: #1e8449;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+  .form-container {
+    margin: 40px 15px;
+    padding: 20px;
+  }
+  .btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}

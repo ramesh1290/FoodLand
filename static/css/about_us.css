@@ -1,0 +1,113 @@
+/* General styles for the About Us container */
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  gap: 40px;
+}
+
+/* About Section Styles */
+.about-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  opacity: 0;
+  /* Hidden initially for fade-in effect */
+  transform: translateY(50px);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect on sections */
+.about-section:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Ensure both image and text are visible */
+.about-img {
+  flex: 1;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure text remains visible */
+.about-text {
+  flex: 1;
+  display: block;
+  text-align: left;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* Alternate Image Placement for Desktop */
+.about-section:nth-child(even) {
+  flex-direction: row-reverse;
+  /* Ensures even sections reverse layout */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .about-section {
+    flex-direction: column;
+    /* Stack vertically on smaller screens */
+    text-align: center;
+    gap: 20px;
+    padding: 15px;
+  }
+
+  /* Reverse order for even sections on mobile */
+  .about-section:nth-child(even) {
+    flex-direction: column-reverse;
+  }
+
+  .about-img {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .about-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+  }
+
+  /* Ensure text is not hidden */
+  .about-text {
+    padding: 10px;
+    text-align: left;
+    display: block;
+  }
+}
+
+/* Fade-in effect when visible */
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

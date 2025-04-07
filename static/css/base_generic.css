@@ -1,0 +1,169 @@
+/* Reset basic styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure html and body fill the viewport and use flex */
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* Header (Top Navbar) */
+.header {
+  background-color: #3498db;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 24px;
+}
+
+/* Hamburger Icon - shown only on mobile */
+.hamburger-container {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.hamburger-bar {
+  width: 100%;
+  height: 4px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+/* Transform hamburger into cross */
+.hamburger-bar.active:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-bar.active:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-bar.active:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Main content wrapper should flex-grow to push footer down */
+.wrapper {
+  display: flex;
+  flex: 1;
+  margin-top: 70px;
+  /* Account for fixed header height */
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 250px;
+  background-color: #2c3e50;
+  color: white;
+  position: fixed;
+  top: 70px;
+  /* Positioned below header */
+  left: 0;
+  height: calc(100vh - 70px);
+  padding-top: 20px;
+  transition: transform 0.3s ease;
+  z-index: 999;
+}
+
+/* Sidebar menu styling */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  padding: 15px;
+  border-bottom: 1px solid #34495e;
+}
+
+.sidebar-menu li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Main Content Area */
+.content-area {
+  width: 100%;
+  padding: 20px;
+  transition: margin-left 0.3s;
+  margin-left: 250px;
+  /* Leave space for sidebar on desktop */
+}
+
+/* Footer styling */
+footer {
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  /* No need for margin-top here as flex layout pushes it to the bottom */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+
+  /* Show hamburger on mobile */
+  .hamburger-container {
+    display: flex;
+  }
+
+  /* Sidebar hidden by default on mobile */
+  .sidebar {
+    transform: translateX(-100%);
+    width: 250px;
+    height: 100vh;
+    top: 0;
+  }
+
+  /* Main content: full width on mobile */
+  .content-area {
+    margin-left: 0;
+    margin-top: 70px;
+    /* maintain space for header */
+  }
+}
+
+/* Hover effect for sidebar anchor links */
+.sidebar-menu li a:hover {
+  background-color: #34495e;
+  /* Darker shade on hover */
+  color: #88b0eb;
+  /* Change text color to a highlight color */
+  padding-left: 25px;
+  /* Add a small indent effect */
+  transition: all 0.5s ease;
+  /* Smooth transition */
+}
+
+/* Additional active state style for sidebar links */
+.sidebar-menu li a.active {
+  background-color: #16a085;
+  /* Active color */
+  color: white;
+}

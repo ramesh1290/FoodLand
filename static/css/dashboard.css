@@ -1,0 +1,258 @@
+/* Hero Section */
+.hero-image,
+.products-section,
+.team-members-section {
+  background: none;
+  /* Remove background color */
+  padding: 70px 20px;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.hero-container h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+/* Grid Layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 40px 0;
+}
+
+/* Card Styling */
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.card-img-top:hover {
+  opacity: 0.8;
+}
+
+.card-body {
+  padding: 25px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+  transition: color 0.3s ease;
+}
+
+.card-title:hover {
+  color: #ff5f6d;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* Button Styling */
+.btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-danger {
+  background-color: #e53946;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-danger:hover {
+  background-color: #c1352e;
+}
+
+.btn-lg {
+  font-size: 1.2rem;
+
+}
+
+.w-100 {
+  width: 100%;
+}
+
+/* Anchor Links - Remove Underline */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+  border-radius: 12px;
+}
+
+a:hover {
+  color: #ff5f6d;
+}
+
+/* Centering text */
+.text-center {
+  text-align: center;
+}
+
+/* Section Titles */
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #333;
+
+}
+
+/* Team Member Section */
+.team-member-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  padding: 40px 0;
+}
+
+.team-member-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.team-member-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.team-member-name {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Product and Team Section Button */
+.text-center a {
+  font-size: 1.2rem;
+  padding: 12px 30px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.text-center a:hover {
+  background-color: #0056b3;
+}
+
+/* Hero Image Section Button */
+.hero-container a {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 15px 30px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.hero-container a:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-container h2 {
+    font-size: 2rem;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .card-img-top {
+    height: 200px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .btn-lg {
+    font-size: 1rem;
+    padding: 12px 22px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .team-member-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Larger Screens */
+@media (min-width: 1200px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .card-img-top {
+    height: 300px;
+  }
+}
